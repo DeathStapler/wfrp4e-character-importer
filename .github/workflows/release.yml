@@ -11,6 +11,15 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Set version from tag
+        run: |
+          VERSION="${GITHUB_REF_NAME#v}"
+          DOWNLOAD="https://github.com/${GITHUB_REPOSITORY}/releases/download/${GITHUB_REF_NAME}/module.zip"
+          jq --arg version "$VERSION" --arg download "$DOWNLOAD" \
+            '.version = $version | .download = $download' module.json > module.json.tmp
+          mv module.json.tmp module.json
+          echo "module.json version set to $VERSION"
+
       - name: Build module.zip
         run: |
           mkdir -p build
