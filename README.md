@@ -15,7 +15,7 @@ This module translates a stable JSON schema (owned by the web application) into 
 
 1. Install the WFRP 4e system from Foundry's system installer.
 2. In Foundry, go to **Add-on Modules > Install Module**.
-3. Paste the manifest URL: `https://github.com/ray/fvtt-wfrp4e-character-import/releases/latest/download/module.json`
+3. Paste the manifest URL: `https://github.com/DeathStapler/wfrp4e-character-importer/releases/latest/download/module.json`
 4. Enable the module in your world.
 
 ## Usage
