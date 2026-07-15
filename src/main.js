@@ -100,21 +100,29 @@ Hooks.on("ready", () => {
  * Add an import button to the Actor directory sidebar.
  */
 Hooks.on("renderActorDirectory", (app, html) => {
-  const importButton = $(
-    `<a class="wfrp4e-import-button" title="Import WFRP 4e Character">
-      <i class="fas fa-file-import"></i> Import Character
-    </a>`,
-  );
+  const root = html instanceof HTMLElement ? html : html[0];
+  if (!root) return;
 
-  importButton.on("click", (event) => {
+  if (root.querySelector(".wfrp4e-import-button")) return;
+
+  const importButton = document.createElement("button");
+  importButton.type = "button";
+  importButton.classList.add("wfrp4e-import-button");
+  importButton.title = "Import WFRP 4e Character";
+  importButton.innerHTML = `<i class="fas fa-file-import"></i> Import Character`;
+
+  importButton.addEventListener("click", (event) => {
     event.preventDefault();
     showImportDialog();
   });
 
-  const footer = html.find(".directory-footer");
-  if (footer.length) {
-    footer.append(importButton);
+  const footer = root.querySelector(".directory-footer");
+  if (footer) {
+    footer.appendChild(importButton);
   } else {
-    html.find(".header-actions").append(importButton);
+    const actions = root.querySelector(".directory-header .action-buttons");
+    if (actions) {
+      actions.appendChild(importButton);
+    }
   }
 });
