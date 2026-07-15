@@ -1,0 +1,243 @@
+{
+  "metadata": {
+    "name": "Lance",
+    "speciesId": "human",
+    "age": 19,
+    "eyes": "Grey",
+    "hair": "Black",
+    "height": "6'2\"",
+    "weight": "178 lbs"
+  },
+  "speciesChoiceMethod": "random",
+  "careerChoiceMethod": "random",
+  "attributeChoiceMethod": "random-keep",
+  "characteristicBases": {
+    "WS": 9,
+    "BS": 5,
+    "S": 13,
+    "T": 9,
+    "I": 12,
+    "Ag": 10,
+    "Dex": 9,
+    "Int": 8,
+    "WP": 10,
+    "Fel": 17
+  },
+  "characteristicAdvances": {
+    "WS": 0,
+    "BS": 0,
+    "S": 0,
+    "T": 0,
+    "I": 0,
+    "Ag": 0,
+    "Dex": 0,
+    "Int": 0,
+    "WP": 0,
+    "Fel": 0
+  },
+  "skills": [
+    {
+      "skillId": "melee-basic",
+      "advances": 10,
+      "isCareerSkill": true,
+      "name": "Melee (Basic)"
+    },
+    {
+      "skillId": "leadership",
+      "advances": 5,
+      "isCareerSkill": false,
+      "name": "Leadership"
+    },
+    {
+      "skillId": "language-bretonnian",
+      "advances": 5,
+      "isCareerSkill": false,
+      "name": "Language (Bretonnian)"
+    },
+    {
+      "skillId": "gossip",
+      "advances": 3,
+      "isCareerSkill": false,
+      "name": "Gossip"
+    },
+    {
+      "skillId": "cool",
+      "advances": 8,
+      "isCareerSkill": true,
+      "name": "Cool"
+    },
+    {
+      "skillId": "animal-care",
+      "advances": 3,
+      "isCareerSkill": false,
+      "name": "Animal Care"
+    },
+    {
+      "skillId": "athletics",
+      "advances": 5,
+      "isCareerSkill": true,
+      "name": "Athletics"
+    },
+    {
+      "skillId": "consume-alcohol",
+      "advances": 5,
+      "isCareerSkill": true,
+      "name": "Consume Alcohol"
+    },
+    {
+      "skillId": "endurance",
+      "advances": 5,
+      "isCareerSkill": true,
+      "name": "Endurance"
+    },
+    {
+      "skillId": "gamble",
+      "advances": 5,
+      "isCareerSkill": true,
+      "name": "Gamble"
+    },
+    {
+      "skillId": "intimidate",
+      "advances": 5,
+      "isCareerSkill": true,
+      "name": "Intimidate"
+    },
+    {
+      "skillId": "outdoor-survival",
+      "advances": 5,
+      "isCareerSkill": true,
+      "name": "Outdoor Survival"
+    }
+  ],
+  "talents": [
+    {
+      "talentId": "doomed",
+      "timesTaken": 1,
+      "name": "Doomed"
+    },
+    {
+      "talentId": "savvy",
+      "timesTaken": 1,
+      "name": "Savvy"
+    },
+    {
+      "talentId": "luck",
+      "timesTaken": 1,
+      "name": "Luck"
+    },
+    {
+      "talentId": "coolheaded",
+      "timesTaken": 1,
+      "name": "Coolheaded"
+    },
+    {
+      "talentId": "nimble-fingered",
+      "timesTaken": 1,
+      "name": "Nimble Fingered"
+    },
+    {
+      "talentId": "rover",
+      "timesTaken": 1,
+      "name": "Rover"
+    }
+  ],
+  "currentCareerId": "outlaw",
+  "currentCareerLevel": 1,
+  "careerHistory": [],
+  "experience": {
+    "total": 120,
+    "spent": 0,
+    "current": 120
+  },
+  "fateExtraPoints": 1,
+  "fate": {
+    "total": 3,
+    "burned": 0,
+    "luck": 3
+  },
+  "resilience": {
+    "total": 3,
+    "burned": 0,
+    "resolve": 3
+  },
+  "sinPoints": 0,
+  "corruption": {
+    "taint": 0,
+    "mutations": []
+  },
+  "status": {
+    "currentWounds": 3,
+    "woundThreshold": 3,
+    "advantage": 0,
+    "psychology": [],
+    "conditions": []
+  },
+  "wealth": {
+    "gold": 0,
+    "silver": 0,
+    "brass": 9
+  },
+  "trappings": [
+    {
+      "trappingId": null,
+      "name": "Clothing",
+      "quantity": 1
+    },
+    {
+      "trappingId": null,
+      "name": "Dagger",
+      "quantity": 1
+    },
+    {
+      "trappingId": null,
+      "name": "Pouch",
+      "quantity": 1
+    },
+    {
+      "trappingId": null,
+      "name": "Sling Bag",
+      "quantity": 1
+    },
+    {
+      "trappingId": null,
+      "name": "2 Candles",
+      "quantity": 1
+    },
+    {
+      "trappingId": null,
+      "name": "1d10 Matches",
+      "quantity": 1
+    },
+    {
+      "trappingId": null,
+      "name": "Hood or Mask",
+      "quantity": 1
+    },
+    {
+      "trappingId": null,
+      "name": "Bedroll",
+      "quantity": 1
+    },
+    {
+      "trappingId": null,
+      "name": "Hand Weapon",
+      "quantity": 1
+    },
+    {
+      "trappingId": null,
+      "name": "Leather Jerkin",
+      "quantity": 1
+    },
+    {
+      "trappingId": null,
+      "name": "Tinderbox",
+      "quantity": 1
+    }
+  ],
+  "spells": [],
+  "notes": "",
+  "backstory": {},
+  "id": "8cb48dee-4547-426a-8428-df0c4a64a82b",
+  "createdAt": "2026-04-02T18:04:38.609Z",
+  "updatedAt": "2026-04-02T18:04:38.610Z"
+}

@@ -1,0 +1,12 @@
+{
+  "name": "wfrp4e-character-import",
+  "version": "1.0.0",
+  "description": "Foundry VTT module that imports WFRP 4e characters from the external Character Creator web app.",
+  "type": "module",
+  "scripts": {
+    "test": "jest"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0"
+  }
+}

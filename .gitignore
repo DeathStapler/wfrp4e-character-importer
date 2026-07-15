@@ -1,0 +1,20 @@
+# Dependencies
+node_modules/
+
+# Test coverage
+coverage/
+
+# Environment
+.env
+.env.*
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+Thumbs.db
+.DS_Store
+
+# Foundry VTT
+foundryconfig.json

@@ -1,0 +1,39 @@
+{
+  "id": "wfrp4e-character-import",
+  "title": "WFRP 4e Character Importer",
+  "description": "Imports characters created by the WFRP 4e Character Creator web application into the WFRP 4e game system on Foundry VTT.",
+  "authors": [
+    {
+      "name": "Ray"
+    }
+  ],
+  "version": "1.0.0",
+  "compatibility": {
+    "minimum": 13,
+    "verified": 14,
+    "maximum": 14
+  },
+  "esmodules": [
+    "src/main.js"
+  ],
+  "styles": [
+    "styles/import-dialog.css"
+  ],
+  "relationships": {
+    "systems": [
+      {
+        "id": "wfrp4e",
+        "type": "system",
+        "compatibility": {
+          "minimum": "9.0.0",
+          "verified": "9.6.3"
+        }
+      }
+    ]
+  },
+  "url": "https://github.com/ray/fvtt-wfrp4e-character-import",
+  "manifest": "https://github.com/ray/fvtt-wfrp4e-character-import/releases/latest/download/module.json",
+  "download": "https://github.com/ray/fvtt-wfrp4e-character-import/releases/download/1.0.0/module.zip",
+  "readme": "README.md",
+  "license": "LICENSE"
+}

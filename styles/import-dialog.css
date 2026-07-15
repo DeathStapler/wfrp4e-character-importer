@@ -1,0 +1,39 @@
+.wfrp4e-import-dialog {
+  padding: 1rem;
+}
+
+.wfrp4e-import-dialog .form-group {
+  margin-top: 0.5rem;
+}
+
+.wfrp4e-import-dialog label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 0.25rem;
+}
+
+.wfrp4e-import-dialog input[type="file"] {
+  width: 100%;
+}
+
+.wfrp4e-import-validation-errors h3 {
+  margin-top: 0.75rem;
+  margin-bottom: 0.25rem;
+}
+
+.wfrp4e-import-validation-errors .error-list {
+  color: #cc0000;
+  list-style: disc;
+  padding-left: 1.5rem;
+}
+
+.wfrp4e-import-validation-errors .warning-list {
+  color: #b8860b;
+  list-style: disc;
+  padding-left: 1.5rem;
+}
+
+.wfrp4e-import-button {
+  cursor: pointer;
+  white-space: nowrap;
+}
