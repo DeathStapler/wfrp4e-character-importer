@@ -12,7 +12,7 @@
 
 import { info, warn, debug, createWarningContext } from "./logger.js";
 import { findItem } from "./compendiumLookup.js";
-import { clamp, deepClone } from "./utilities.js";
+import { clamp } from "./utilities.js";
 import {
   ITEM_TYPE,
   MONEY_COIN_VALUE,
@@ -99,7 +99,7 @@ export async function importSkills(skills, characterName, summary) {
 
     if (compendiumItem) {
       const itemData = compendiumItem.toObject();
-      itemData.system.advances = advances;
+      itemData.system.advances.value = advances;
       items.push(itemData);
       summary.skillsImported++;
       debug(`Imported skill "${skill.name}" with ${advances} advances from compendium.`);
@@ -173,7 +173,7 @@ export async function importTalents(talents, characterName, summary) {
 
     if (compendiumItem) {
       const itemData = compendiumItem.toObject();
-      itemData.system.advances = timesTaken;
+      itemData.system.advances.value = timesTaken;
       items.push(itemData);
       summary.talentsImported++;
       debug(`Imported talent "${talent.name}" (${timesTaken} advances) from compendium.`);
@@ -271,9 +271,9 @@ export async function importCareer(careerId, careerLevel, characterName, summary
  */
 function configureCareerItem(compendiumItem, level, summary) {
   const itemData = compendiumItem.toObject();
-  itemData.system.current = { value: true };
-  itemData.system.complete = { value: false };
-  itemData.system.level = { value: String(level) };
+  itemData.system.current.value = true;
+  itemData.system.complete.value = false;
+  itemData.system.level.value = level;
   summary.careersImported++;
   debug(`Imported career "${itemData.name}" at level ${level}.`);
   return itemData;

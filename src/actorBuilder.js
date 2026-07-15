@@ -7,8 +7,8 @@
  * @module actorBuilder
  */
 
-import { info, warn, debug } from "./logger.js";
-import { clamp, speciesIdToName } from "./utilities.js";
+import { info, debug } from "./logger.js";
+import { clamp } from "./utilities.js";
 import {
   CHARACTERISTIC_MAP,
   CHARACTERISTIC_PATH,

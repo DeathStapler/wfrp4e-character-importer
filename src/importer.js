@@ -34,7 +34,6 @@ import {
   createSummary,
 } from "./itemImporter.js";
 import { getSetting } from "./settings.js";
-import { formatBulletList } from "./utilities.js";
 
 /**
  * Import result.
@@ -88,16 +87,13 @@ async function reportValidationErrors(errors, warnings) {
     </div>
   `;
 
-  await Dialog.wait({
-    title: "Import Validation Errors",
+  await foundry.applications.api.DialogV2.prompt({
+    window: { title: "Import Validation Errors" },
     content,
-    buttons: {
-      ok: {
-        icon: '<i class="fas fa-check"></i>',
-        label: "OK",
-      },
+    ok: {
+      icon: "fas fa-check",
+      label: "OK",
     },
-    default: "ok",
   });
 }
 
@@ -140,16 +136,13 @@ async function showImportSummary(actor, summary) {
     lines.push("</table>");
   }
 
-  await Dialog.wait({
-    title: "Import Complete",
+  await foundry.applications.api.DialogV2.prompt({
+    window: { title: "Import Complete" },
     content: lines.join(""),
-    buttons: {
-      ok: {
-        icon: '<i class="fas fa-check"></i>',
-        label: "OK",
-      },
+    ok: {
+      icon: "fas fa-check",
+      label: "OK",
     },
-    default: "ok",
   });
 }
 

@@ -46,7 +46,7 @@ async function getPackIndex(pack) {
     return indexCache.get(collection);
   }
 
-  const index = await pack.getIndex();
+  const index = await pack.getIndex({ fields: ["type", "flags"] });
   const entries = [...index];
   indexCache.set(collection, entries);
   return entries;
@@ -74,8 +74,8 @@ export async function findItemByName(name, itemType = null, characterName = "") 
 
     for (const entry of index) {
       if (entry.name === name) {
+        if (itemType && entry.type !== itemType) continue;
         const item = await pack.getDocument(entry._id);
-        if (itemType && item.type !== itemType) continue;
         matches.push(item);
       }
     }
@@ -89,8 +89,8 @@ export async function findItemByName(name, itemType = null, characterName = "") 
 
       for (const entry of index) {
         if (entry.name?.toLowerCase() === lowerName) {
+          if (itemType && entry.type !== itemType) continue;
           const item = await pack.getDocument(entry._id);
-          if (itemType && item.type !== itemType) continue;
           matches.push(item);
         }
       }
@@ -131,11 +131,11 @@ export async function findItemByIdentifier(identifier, itemType = null, characte
     const index = await getPackIndex(pack);
 
     for (const entry of index) {
-      const item = await pack.getDocument(entry._id);
-      const flagId = item.flags?.wfrp4e?.id;
+      const flagId = entry.flags?.wfrp4e?.id;
 
       if (flagId === identifier) {
-        if (itemType && item.type !== itemType) continue;
+        if (itemType && entry.type !== itemType) continue;
+        const item = await pack.getDocument(entry._id);
         debug(`Found compendium item by identifier "${identifier}"`);
         return item;
       }

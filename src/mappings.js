@@ -163,7 +163,6 @@ export const SKILL_CHARACTERISTIC_DEFAULTS = {
   "Stealth (Rural)": "ag",
   "Stealth (Urban)": "ag",
   "Cool": "wp",
-  "Endurance": "t",
   "Intimidate": "s",
   "Leadership": "fel",
   "Gossip": "fel",

@@ -28,15 +28,17 @@ async function showImportDialog() {
     </div>
   `;
 
-  await Dialog.wait({
-    title: "Import WFRP 4e Character",
+  await foundry.applications.api.DialogV2.wait({
+    window: { title: "Import WFRP 4e Character" },
     content,
-    buttons: {
-      import: {
-        icon: '<i class="fas fa-file-import"></i>',
+    buttons: [
+      {
+        action: "import",
+        icon: "fas fa-file-import",
         label: "Import",
-        callback: async (html) => {
-          const fileInput = html[0].querySelector("#wfrp4e-import-file");
+        default: true,
+        callback: async (event, button, dialog) => {
+          const fileInput = dialog.element.querySelector("#wfrp4e-import-file");
           const file = fileInput?.files?.[0];
 
           if (!file) {
@@ -64,12 +66,12 @@ async function showImportDialog() {
           }
         },
       },
-      cancel: {
-        icon: '<i class="fas fa-times"></i>',
+      {
+        action: "cancel",
+        icon: "fas fa-times",
         label: "Cancel",
       },
-    },
-    default: "import",
+    ],
   });
 }
 
@@ -89,11 +91,6 @@ Hooks.on("ready", () => {
   setDebugEnabled(getSetting("debugLogging"));
 
   info("WFRP 4e Character Importer ready.");
-
-  // Register the scene control button
-  Hooks.on("getActorDirectoryEntryContext", (html, entries) => {
-    // Future: right-click context menu on actor directory
-  });
 });
 
 /**
