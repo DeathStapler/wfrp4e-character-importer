@@ -20,6 +20,9 @@ import {
   SKILL_CHARACTERISTIC_DEFAULTS,
 } from "./mappings.js";
 
+const MODULE_ID = "wfrp4e-character-import";
+const PENDING_ADVANCES_FLAG = "pendingAdvances";
+
 /**
  * Import summary tracking for a single import operation.
  * @typedef {object} ImportSummary
@@ -99,13 +102,15 @@ export async function importSkills(skills, characterName, summary) {
 
     if (compendiumItem) {
       const itemData = compendiumItem.toObject();
-      itemData.system.advances.value = advances;
+      stashPendingAdvances(itemData, advances);
+      itemData.system.advances.value = 0;
       items.push(itemData);
       summary.skillsImported++;
       debug(`Imported skill "${skill.name}" with ${advances} advances from compendium.`);
     } else {
       // Create custom skill
-      const itemData = createCustomSkill(skill.name, advances);
+      const itemData = createCustomSkill(skill.name, 0);
+      stashPendingAdvances(itemData, advances);
       items.push(itemData);
       summary.skillsCreated++;
       warn(`Skill not found in compendiums`, createWarningContext(
@@ -173,12 +178,14 @@ export async function importTalents(talents, characterName, summary) {
 
     if (compendiumItem) {
       const itemData = compendiumItem.toObject();
-      itemData.system.advances.value = timesTaken;
+      stashPendingAdvances(itemData, timesTaken);
+      itemData.system.advances.value = 0;
       items.push(itemData);
       summary.talentsImported++;
       debug(`Imported talent "${talent.name}" (${timesTaken} advances) from compendium.`);
     } else {
-      const itemData = createCustomTalent(talent.name, timesTaken);
+      const itemData = createCustomTalent(talent.name, 0);
+      stashPendingAdvances(itemData, timesTaken);
       items.push(itemData);
       summary.talentsCreated++;
       warn(`Talent not found in compendiums`, createWarningContext(
@@ -209,6 +216,51 @@ function createCustomTalent(name, advances) {
       tests: { value: "" },
     },
   };
+}
+
+/**
+ * Stash the real advance value on an item data object so it can be applied
+ * after the item is created, avoiding WFRP4e's advancement cost prompt.
+ *
+ * @param {object} itemData - The item data object.
+ * @param {number} advances - The intended advance value.
+ */
+function stashPendingAdvances(itemData, advances) {
+  itemData.flags = itemData.flags || {};
+  itemData.flags[MODULE_ID] = itemData.flags[MODULE_ID] || {};
+  itemData.flags[MODULE_ID][PENDING_ADVANCES_FLAG] = advances;
+}
+
+/**
+ * Apply pending advances to owned items created by importSkills/importTalents.
+ *
+ * WFRP4e prompts for an advancement cost when items are created with
+ * advances.value > 0. To avoid that, items are created with advances set
+ * to 0 and the real value is stashed in a module flag, then applied
+ * afterwards via updateEmbeddedDocuments.
+ *
+ * @param {Actor} actor - The actor that owns the items.
+ * @param {Item[]} items - Items returned by Actor.createEmbeddedDocuments.
+ * @returns {Promise<void>}
+ */
+export async function applyPendingAdvances(actor, items) {
+  const updates = [];
+
+  for (const item of items) {
+    const pending = item.getFlag(MODULE_ID, PENDING_ADVANCES_FLAG);
+    if (pending != null) {
+      updates.push({
+        _id: item.id,
+        "system.advances.value": pending,
+        [`flags.${MODULE_ID}.-=pendingAdvances`]: null,
+      });
+    }
+  }
+
+  if (updates.length > 0) {
+    debug(`Applying pending advances to ${updates.length} item(s)...`);
+    await actor.updateEmbeddedDocuments("Item", updates);
+  }
 }
 
 /**

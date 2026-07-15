@@ -32,6 +32,7 @@ import {
   importTrappings,
   importMoney,
   createSummary,
+  applyPendingAdvances,
 } from "./itemImporter.js";
 import { getSetting } from "./settings.js";
 
@@ -218,9 +219,15 @@ export async function importCharacter(data) {
     if (careerItem) allItems.push(careerItem);
     allItems.push(...trappingItems, ...moneyItems);
 
+    let createdItems = [];
     if (allItems.length > 0) {
       debug(`Creating ${allItems.length} embedded items...`);
-      await actor.createEmbeddedDocuments("Item", allItems);
+      createdItems = await actor.createEmbeddedDocuments("Item", allItems);
+    }
+
+    if (createdItems.length > 0) {
+      debug(`Applying pending advances to ${createdItems.length} embedded item(s)...`);
+      await applyPendingAdvances(actor, createdItems);
     }
 
     // Step 14: Import Active Effects (future: apply any active effects from export)
